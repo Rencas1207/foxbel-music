@@ -1,15 +1,24 @@
-import './App.css';
-import { Aside } from './components/Aside/Aside';
-import { Footer } from './components/Footer/Footer';
-import { Header } from './components/Header/Header';
+import React from 'react';
+
+import { SongsContextProvider } from './context/SongContext';
+
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+
+import { SearchSongs } from './pages/SearchSongs/SearchSongs';
+import { GlobalStyles } from './styles/GlobalStyles';
 
 function App() {
   return (
-    <>
-      <Header />
-      <Aside />
-      <Footer />
-    </>
+    <SongsContextProvider>
+      <GlobalStyles />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/foxbel-music" element={<SearchSongs />} />
+          <Route path="/foxbel-music/track/:id" element={<SearchSongs />} />
+          <Route path="*" element={<Navigate to="/foxbel-music" />} />
+        </Routes>
+      </BrowserRouter>
+    </SongsContextProvider>
   );
 }
 
