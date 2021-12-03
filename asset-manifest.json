@@ -1,33 +1,17 @@
 {
   "files": {
-    "main.css": "/foxbel-music/static/css/main.86434f6c.chunk.css",
-    "main.js": "/foxbel-music/static/js/main.806ce843.chunk.js",
-    "main.js.map": "/foxbel-music/static/js/main.806ce843.chunk.js.map",
+    "main.js": "/foxbel-music/static/js/main.babe6b6f.chunk.js",
+    "main.js.map": "/foxbel-music/static/js/main.babe6b6f.chunk.js.map",
     "runtime-main.js": "/foxbel-music/static/js/runtime-main.a78e36b8.js",
     "runtime-main.js.map": "/foxbel-music/static/js/runtime-main.a78e36b8.js.map",
-    "static/js/2.41722fa3.chunk.js": "/foxbel-music/static/js/2.41722fa3.chunk.js",
-    "static/js/2.41722fa3.chunk.js.map": "/foxbel-music/static/js/2.41722fa3.chunk.js.map",
+    "static/js/2.df617bb6.chunk.js": "/foxbel-music/static/js/2.df617bb6.chunk.js",
+    "static/js/2.df617bb6.chunk.js.map": "/foxbel-music/static/js/2.df617bb6.chunk.js.map",
     "index.html": "/foxbel-music/index.html",
-    "static/css/main.86434f6c.chunk.css.map": "/foxbel-music/static/css/main.86434f6c.chunk.css.map",
-    "static/js/2.41722fa3.chunk.js.LICENSE.txt": "/foxbel-music/static/js/2.41722fa3.chunk.js.LICENSE.txt",
-    "static/media/adele-wallpaper.png": "/foxbel-music/static/media/adele-wallpaper.4f8353f9.png",
-    "static/media/image-1.png": "/foxbel-music/static/media/image-1.48545682.png",
-    "static/media/image-10.png": "/foxbel-music/static/media/image-10.f399f9f8.png",
-    "static/media/image-2.png": "/foxbel-music/static/media/image-2.4a7f89ad.png",
-    "static/media/image-3.png": "/foxbel-music/static/media/image-3.35c800e3.png",
-    "static/media/image-4.png": "/foxbel-music/static/media/image-4.ba95bff4.png",
-    "static/media/image-5.png": "/foxbel-music/static/media/image-5.5204b0a4.png",
-    "static/media/image-6.png": "/foxbel-music/static/media/image-6.cdcc8257.png",
-    "static/media/image-7.png": "/foxbel-music/static/media/image-7.d5a7f2f0.png",
-    "static/media/image-8.png": "/foxbel-music/static/media/image-8.f160f349.png",
-    "static/media/image-9.png": "/foxbel-music/static/media/image-9.a2dc4b43.png",
-    "static/media/logo.svg": "/foxbel-music/static/media/logo.e4f7f5bc.svg",
-    "static/media/three.svg": "/foxbel-music/static/media/three.55ccabcd.svg"
+    "static/js/2.df617bb6.chunk.js.LICENSE.txt": "/foxbel-music/static/js/2.df617bb6.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.a78e36b8.js",
-    "static/js/2.41722fa3.chunk.js",
-    "static/css/main.86434f6c.chunk.css",
-    "static/js/main.806ce843.chunk.js"
+    "static/js/2.df617bb6.chunk.js",
+    "static/js/main.babe6b6f.chunk.js"
   ]
 }
