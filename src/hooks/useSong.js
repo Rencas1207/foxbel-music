@@ -26,7 +26,7 @@ export const useSong = () => {
       setLoading(false);
     });
     localStorage.setItem('lastKeyword', keywordToUse);
-  }, [setSongs, params]);
+  }, [setSongs, params, keywordToUse]);
 
   useEffect(() => {
     setLoading(true);

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { useSong } from '../../hooks/useSong';
@@ -17,9 +17,15 @@ const FooterStyled = styled.footer`
   filter: drop-shadow(0px -5px 37px rgba(0, 0, 0, 0.2));
   display: flex;
   justify-content: space-between;
+
   .figure {
     display: flex;
-    width: 25%;
+    max-width: 22%;
+
+    ${breakpoints.tablet} {
+      max-width: 20%;
+    }
+
     img {
       background: var(--main-red);
       width: 100px;
@@ -29,6 +35,7 @@ const FooterStyled = styled.footer`
     &__description {
       margin-left: 1rem;
       display: flex;
+      flex-wrap: wrap;
 
       flex-direction: column;
       justify-content: center;
@@ -113,22 +120,24 @@ const FooterStyled = styled.footer`
 `;
 
 export const Footer = () => {
-  const [play, setPlay] = useState(false);
-  const [volume, setVolume] = useState(30);
-  const { track } = useSong();
-
+  const [playing, setPlaying] = useState(false);
   const trackAudio = useRef(null);
   const volumeAudio = useRef(null);
+  const { track } = useSong();
+  const [volume, setVolume] = useState(30);
 
-  const justPlay = () => {
-    if (play) {
-      trackAudio.current.pause();
-      setPlay(!play);
-    } else {
-      trackAudio.current.play();
-      setPlay(!play);
-    }
-  };
+  const toggle = () => setPlaying(!playing);
+
+  useEffect(() => {
+    playing ? trackAudio.current.play() : trackAudio.current.pause();
+  }, [playing]);
+
+  useEffect(() => {
+    trackAudio.current.addEventListener('ended', () => setPlaying(false));
+    return () => {
+      trackAudio.current.removeEventListener('ended', () => setPlaying(false));
+    };
+  }, []);
 
   const volumeChange = () => {
     trackAudio.current.volume = volumeAudio.current.value / 100;
@@ -154,9 +163,9 @@ export const Footer = () => {
         <button id="pre">
           <i className="fas fa-step-backward"></i>
         </button>
-        <button className="play" onClick={justPlay}>
-          <i className={play ? 'fas fa-pause' : 'fas fa-play'}></i>
-          <audio src={track?.preview} ref={trackAudio}></audio>
+        <button className="play" onClick={toggle}>
+          <i className={playing ? 'fas fa-pause' : 'fas fa-play'}></i>
+          <audio src={track?.preview} ref={trackAudio} id="audio"></audio>
         </button>
         <button id="next">
           <i className="fas fa-step-forward"></i>
