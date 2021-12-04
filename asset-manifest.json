@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/foxbel-music/static/js/main.babe6b6f.chunk.js",
-    "main.js.map": "/foxbel-music/static/js/main.babe6b6f.chunk.js.map",
+    "main.js": "/foxbel-music/static/js/main.d34d96a5.chunk.js",
+    "main.js.map": "/foxbel-music/static/js/main.d34d96a5.chunk.js.map",
     "runtime-main.js": "/foxbel-music/static/js/runtime-main.a78e36b8.js",
     "runtime-main.js.map": "/foxbel-music/static/js/runtime-main.a78e36b8.js.map",
     "static/js/2.df617bb6.chunk.js": "/foxbel-music/static/js/2.df617bb6.chunk.js",
@@ -12,6 +12,6 @@
   "entrypoints": [
     "static/js/runtime-main.a78e36b8.js",
     "static/js/2.df617bb6.chunk.js",
-    "static/js/main.babe6b6f.chunk.js"
+    "static/js/main.d34d96a5.chunk.js"
   ]
 }
