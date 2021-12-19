@@ -4,6 +4,17 @@ import styled from 'styled-components';
 import { useSong } from '../../hooks/useSong';
 import { breakpoints } from '../../styles/MediaQueries';
 
+import {
+  FaPlay,
+  FaPause,
+  FaVolumeDown,
+  FaVolumeMute,
+  FaVolumeUp,
+  FaVolumeOff,
+  IoPlaySkipBack,
+  IoPlaySkipForward,
+} from 'react-icons/all';
+
 const FooterStyled = styled.footer`
   position: fixed;
   bottom: 0;
@@ -72,19 +83,22 @@ const FooterStyled = styled.footer`
         background: var(--light-red);
         padding: 0 1rem;
       }
-      i {
-        color: var(--white);
-        font-size: 18px;
-        text-align: center;
+      svg {
+        fill: var(--white);
+        width: 20px;
+        height: 20px;
+        /* text-align: center; */
       }
     }
   }
   .volume {
+    border: 1px solid red;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
     input {
+      border: 1px solid green;
       -webkit-appearance: none;
       width: 80%;
       outline: none;
@@ -110,46 +124,64 @@ const FooterStyled = styled.footer`
         cursor: pointer;
       }
     }
-    i {
-      padding: 1rem 1.5rem;
-      color: var(--white);
-      font-size: 25px;
-      text-align: center;
+    .volume-control {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 2.8rem 0 0rem;
+      svg {
+        fill: var(--white);
+        width: 30px;
+        height: 30px;
+      }
     }
   }
 `;
 
 export const Footer = () => {
-  const [playing, setPlaying] = useState(false);
+  // const [playing, setPlaying] = useState(false);
+  const { track, playing, setPlaying, songs, sound } = useSong();
   const trackAudio = useRef(null);
   const volumeAudio = useRef(null);
-  const { track } = useSong();
   const [volume, setVolume] = useState(30);
 
   const toggle = () => setPlaying(!playing);
 
-  useEffect(() => {
-    playing ? trackAudio.current.play() : trackAudio.current.pause();
-  }, [playing]);
+  // console.log(sound);
+
+  // let songsNew = songs.map().filter((item) => item.id === sound);
+  let songsNew = songs
+    .map((item) => {
+      return item;
+    })
+    .filter((track) => track.id === sound);
+
+  // console.log(songsNew);
 
   useEffect(() => {
+    playing ? trackAudio.current.play() : trackAudio.current.pause();
+
     trackAudio.current.addEventListener('ended', () => setPlaying(false));
-    return () => {
-      trackAudio.current.removeEventListener('ended', () => setPlaying(false));
-    };
-  }, []);
+    // return () => {
+    //   trackAudio.current.removeEventListener('ended', () => setPlaying(false));
+
+    // };
+  }, [playing, setPlaying]);
 
   const volumeChange = () => {
     trackAudio.current.volume = volumeAudio.current.value / 100;
     setVolume(volumeAudio.current.value);
   };
 
+  // console.log(track);
+
   return (
     <FooterStyled>
       <div className="figure">
         <img
-          src={track.artist?.picture_medium}
-          alt={track.artist?.name}
+          src={track.album?.cover_medium}
+          alt={track.album?.title}
+          title={track.title_short}
           loading="lazy"
         />
         <div className="figure__description">
@@ -161,14 +193,14 @@ export const Footer = () => {
       </div>
       <div className="middle">
         <button id="pre">
-          <i className="fas fa-step-backward"></i>
+          <IoPlaySkipBack style={{ width: '26px', height: '26px' }} />
         </button>
         <button className="play" onClick={toggle}>
-          <i className={playing ? 'fas fa-pause' : 'fas fa-play'}></i>
+          {playing ? <FaPause /> : <FaPlay />}
           <audio src={track?.preview} ref={trackAudio} id="audio"></audio>
         </button>
         <button id="next">
-          <i className="fas fa-step-forward"></i>
+          <IoPlaySkipForward style={{ width: '26px', height: '26px' }} />
         </button>
       </div>
 
@@ -181,17 +213,17 @@ export const Footer = () => {
           ref={volumeAudio}
           onChange={volumeChange}
         />
-        <i
-          className={
-            volume >= 0 && volume <= 29
-              ? 'fas fa-volume-off'
-              : volume >= 30 && volume <= 59
-              ? 'fas fa-volume-down'
-              : volume >= 60 && volume <= 100
-              ? 'fas fa-volume-up'
-              : null
-          }
-        ></i>
+        <span className="volume-control">
+          {volume >= 0 && volume <= 5 ? (
+            <FaVolumeMute />
+          ) : volume >= 6 && volume <= 29 ? (
+            <FaVolumeOff />
+          ) : volume >= 30 && volume <= 59 ? (
+            <FaVolumeDown />
+          ) : volume >= 60 && volume <= 100 ? (
+            <FaVolumeUp />
+          ) : null}
+        </span>
       </div>
     </FooterStyled>
   );

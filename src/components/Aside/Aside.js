@@ -77,34 +77,34 @@ export const Aside = ({ show }) => {
       <img src={logo} alt="foxbel-music" loading="lazy" />
       <div className="list">
         <h3 className="list__title">Mi Librería</h3>
-        <Link to="/foxbel-music?q=recientes" className="list__item active">
+        <Link to="?q=recientes" className="list__item active">
           Recientes
         </Link>
-        <Link to="/foxbel-music?q=artistas" className="list__item">
+        <Link to="?q=artistas" className="list__item">
           Artistas
         </Link>
-        <Link to="/foxbel-music?q=albums" className="list__item">
+        <Link to="?q=albums" className="list__item">
           Álbums
         </Link>
-        <Link to="/foxbel-music?q=canciones" className="list__item">
+        <Link to="?q=canciones" className="list__item">
           Canciones
         </Link>
-        <Link to="/foxbel-music?q=estaciones" className="list__item">
+        <Link to="?q=estaciones" className="list__item">
           Estaciones
         </Link>
       </div>
       <div className="list">
         <h3 className="list__title">Playlist</h3>
-        <Link to="/foxbel-music?q=metal" className="list__item">
+        <Link to="?q=metal" className="list__item">
           Metal
         </Link>
-        <Link to="/foxbel-music?q=dance" className="list__item">
+        <Link to="?q=dance" className="list__item">
           Para bailar
         </Link>
-        <Link to="/foxbel-music?q=rock" className="list__item">
+        <Link to="?q=rock" className="list__item">
           Rock 90s
         </Link>
-        <Link to="/foxbel-music?q=baladas" className="list__item">
+        <Link to="?q=baladas" className="list__item">
           Baladas
         </Link>
       </div>

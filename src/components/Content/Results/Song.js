@@ -2,8 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { useNavigate } from 'react-router-dom';
+import { FaPlay } from 'react-icons/all';
 import { ThreePoints } from './ThreePoints';
 import { breakpoints } from '../../../styles/MediaQueries';
+import { useSong } from '../../../hooks/useSong';
+import { useSingleTrack } from '../../../hooks/useSingleTrack';
 
 const SongStyles = styled.div`
   ${breakpoints.phone} {
@@ -19,17 +22,16 @@ const SongStyles = styled.div`
     img {
       object-fit: cover;
     }
-    i {
+    svg {
       position: absolute;
       top: 0;
       bottom: 0;
       right: 0;
       left: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 2.5rem;
-      color: var(--white);
+      margin: auto;
+      width: 45px;
+      height: 45px;
+      fill: var(--white);
     }
   }
   .song {
@@ -37,18 +39,19 @@ const SongStyles = styled.div`
   }
 `;
 
-export const Song = ({ artist, title, album, id }) => {
-  const navigate = useNavigate();
+const Song = ({ artist, title, album, id }) => {
+  // const navigate = useNavigate();
+  const { setSound } = useSingleTrack();
 
   const track = () => {
-    navigate(`/foxbel-music/track/${id}`);
+    setSound(id);
   };
 
   return (
     <SongStyles>
       <div className="figure" onClick={track}>
         <img src={album.cover_medium} alt={title} loading="lazy" />
-        <i className="fas fa-play"></i>
+        <FaPlay />
         <ThreePoints $rotate="-90deg" $position="absolute" rotate="true" />
       </div>
       <h4 className="song">{title}</h4>
@@ -56,3 +59,7 @@ export const Song = ({ artist, title, album, id }) => {
     </SongStyles>
   );
 };
+
+export default React.memo(Song, (prevProps, nextProps) => {
+  return prevProps.id === nextProps.id;
+});

@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useSong } from '../../../hooks/useSong';
 import { Loading } from '../../Loading/Loading';
-import { Song } from './Song';
+import Song from './Song';
 
 const SongGridStyled = styled.div`
   display: grid;

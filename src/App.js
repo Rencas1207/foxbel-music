@@ -2,7 +2,12 @@ import React from 'react';
 
 import { SongsContextProvider } from './context/SongContext';
 
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import {
+  HashRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 
 import { SearchSongs } from './pages/SearchSongs/SearchSongs';
 import { GlobalStyles } from './styles/GlobalStyles';
@@ -11,13 +16,13 @@ function App() {
   return (
     <SongsContextProvider>
       <GlobalStyles />
-      <BrowserRouter>
+      <Router>
         <Routes>
-          <Route path="/foxbel-music" element={<SearchSongs />} />
-          <Route path="/foxbel-music/track/:id" element={<SearchSongs />} />
-          <Route path="*" element={<Navigate to="/foxbel-music" />} />
+          <Route path="/" element={<SearchSongs />} />
+          <Route path="/track/:id" element={<SearchSongs />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
-      </BrowserRouter>
+      </Router>
     </SongsContextProvider>
   );
 }

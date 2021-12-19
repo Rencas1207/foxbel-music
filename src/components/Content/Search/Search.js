@@ -129,7 +129,7 @@ export const Search = ({ show, setShow }) => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    navigate(`/foxbel-music?q=${decodeURI(value)}`);
+    navigate(`?q=${decodeURI(value)}`);
     setValue('');
   };
 
