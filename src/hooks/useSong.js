@@ -1,52 +1,48 @@
 import { useContext, useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 import { SongsContext } from '../context/SongContext';
 import { getTracks } from '../services/getTracks';
 import { getSongs } from '../services/getSongs';
 
-import { useLocation, useParams } from 'react-router-dom';
-
 export const useSong = () => {
-  const { songs, setSongs } = useContext(SongsContext);
+  const { songs, setSongs, setPlaying, setLoading, setAutoPlay, loading } =
+    useContext(SongsContext);
   const [track, setTrack] = useState({});
 
-  const [playing, setPlaying] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  // const { id } = useParams();
-  // let location = useLocation();
-  // const params = location.search.slice(3);
-
-  // const keywordToUse = params || localStorage.getItem('lastKeyword') || 'Adele';
+  // const [loadingSong, setLoadingSong] = useState(false);
+  const { id } = useParams();
+  let location = useLocation();
+  const currentTrack = location.search.slice(3);
+  // console.log(currentTrack);
+  const keywordToUse =
+    currentTrack || localStorage.getItem('lastKeyword') || 'Adele';
 
   useEffect(() => {
-    setLoading(true);
-    // getSongs({
-    //   // artist: params ? params : keywordToUse,
-    // }).then((data) => {
-    //   setSongs(data);
-    //   setPlaying(false);
-    //   setLoading(false);
-    // });
-    getSongs().then((data) => {
+    // setLoadingSong(true);
+    // setPlaying(false);
+    getSongs({
+      artist: currentTrack ? currentTrack : keywordToUse,
+    }).then((data) => {
       setSongs(data);
       setPlaying(false);
       setLoading(false);
+      setAutoPlay(false);
     });
-    // localStorage.setItem('lastKeyword', keywordToUse);
-    // }, [setSongs, params, keywordToUse]);
-  }, [setSongs]);
+    localStorage.setItem('lastKeyword', keywordToUse);
+  }, [setSongs, currentTrack, keywordToUse, setLoading]);
 
   // console.log(sound);
 
-  // useEffect(() => {
-  //   // setLoading(true);
+  useEffect(() => {
+    // setLoading(true);
 
-  //   getTracks({ id: id ? id : songs[0]?.id }).then((data) => {
-  //     setTrack(data);
-  //     setPlaying(false);
-  //     // setLoading(false);
-  //   });
-  // }, [setTrack, setPlaying, songs, id]);
+    getTracks({ id: id ? id : songs[0]?.id }).then((data) => {
+      setTrack(data);
+      // setPlaying(false);
+      // setLoadingSong(false);
+      setLoading(false);
+    });
+  }, [setTrack, songs, id, setLoading]);
 
-  return { songs, track, loading, playing, setPlaying };
+  return { songs, track };
 };

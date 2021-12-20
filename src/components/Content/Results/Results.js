@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import styled from 'styled-components';
+import { SongsContext } from '../../../context/SongContext';
 import { useSong } from '../../../hooks/useSong';
 import { SongGrid } from './SongGrid';
 
@@ -14,6 +15,7 @@ const ResultsStyles = styled.section`
 
 export const Results = () => {
   const { songs } = useSong();
+  // console.log(songs);
 
   return (
     <>

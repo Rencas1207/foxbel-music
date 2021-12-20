@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 
 import { useNavigate } from 'react-router-dom';
 import { FaPlay } from 'react-icons/all';
 import { ThreePoints } from './ThreePoints';
 import { breakpoints } from '../../../styles/MediaQueries';
-import { useSong } from '../../../hooks/useSong';
-import { useSingleTrack } from '../../../hooks/useSingleTrack';
+// import { useSong } from '../../../hooks/useSong';
+// import { useSingleTrack } from '../../../hooks/useSingleTrack';
+import { SongsContext } from '../../../context/SongContext';
 
 const SongStyles = styled.div`
   ${breakpoints.phone} {
@@ -40,11 +41,24 @@ const SongStyles = styled.div`
 `;
 
 const Song = ({ artist, title, album, id }) => {
-  // const navigate = useNavigate();
-  const { setSound } = useSingleTrack();
+  const navigate = useNavigate();
+  const { setPlaying, trackAudio, playing, autoPlay, setAutoPlay, setLoading } =
+    useContext(SongsContext);
 
   const track = () => {
-    setSound(id);
+    navigate(`/track/${id}`);
+    // setLoading(false);
+    setAutoPlay(true);
+    setPlaying(true);
+    trackAudio.current.setAttribute('autoPlay', 'true');
+
+    // if (playing) {
+    // trackAudio.current.play();
+    // } else {
+    //   trackAudio.current.pause();
+    // }
+    // console.log(playing);
+    // playing ? trackAudio.current.play() : null;
   };
 
   return (

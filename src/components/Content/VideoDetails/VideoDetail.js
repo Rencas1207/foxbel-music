@@ -1,6 +1,8 @@
 import React from 'react';
+import { useContext } from 'react/cjs/react.development';
 
 import styled from 'styled-components';
+import { SongsContext } from '../../../context/SongContext';
 import { useSong } from '../../../hooks/useSong';
 import { breakpoints } from '../../../styles/MediaQueries';
 import { Loading } from '../../Loading/Loading';
@@ -123,7 +125,8 @@ const VideoDetailStyled = styled.section`
 `;
 
 export const VideoDetail = () => {
-  const { track, loading } = useSong();
+  const { loading } = useContext(SongsContext);
+  // const { track, loading } = useSong();
 
   return (
     <>
@@ -133,32 +136,36 @@ export const VideoDetail = () => {
         <VideoDetailStyled className="mb-3">
           <div className="artist-figure">
             <img
-              src={track?.artist?.picture_medium}
-              alt={track?.artist?.name}
+              // src={track?.artist?.picture_medium}
+              // alt={track?.artist?.name}
               loading="lazy"
             />
             <i className="fas fa-play"></i>
           </div>
           <div
             className="artist-description"
-            style={{
-              background: `url(${track?.album?.cover_xl}) center no-repeat`,
-            }}
+            style={
+              {
+                // background: `url(${track?.album?.cover_xl}) center no-repeat`,
+              }
+            }
           >
             <div className="artist-description__shadow"></div>
             <div className="artist-description__content">
               <h2 className="artist-description__title">
-                {track?.artist?.name}
+                {/* {track?.artist?.name} */}
               </h2>
               <div className="artist-description__item">
                 <p>
-                  Lo mejor de {track?.artist?.name}{' '}
+                  {/* Lo mejor de {track?.artist?.name}{' '} */}
                   <span>321, 123 seguidores</span>
                 </p>
                 <summary>
-                  {track?.artist?.name} (Tottenham, Londres, Inglaterra, 5 de
-                  mayo de 1988), conocida simplemente como {track?.artist?.name}
-                  , es una cantante, compositora y multinstrumentista británica.
+                  {/* {track?.artist?.name}  */}
+                  (Tottenham, Londres, Inglaterra, 5 de mayo de 1988), conocida
+                  simplemente como
+                  {/* {track?.artist?.name} */}, es una cantante, compositora y
+                  multinstrumentista británica.
                 </summary>
               </div>
               <div className="artist-btns">

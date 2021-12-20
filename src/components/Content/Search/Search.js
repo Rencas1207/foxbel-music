@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 import { useNavigate } from 'react-router-dom';
 import { breakpoints } from '../../../styles/MediaQueries';
+import { useContext } from 'react/cjs/react.development';
+import { SongsContext } from '../../../context/SongContext';
 
 const SearchStyled = styled.section`
   width: 100%;
@@ -121,6 +123,7 @@ const SearchStyled = styled.section`
 export const Search = ({ show, setShow }) => {
   const [value, setValue] = useState('');
   const navigate = useNavigate();
+  const { trackAudio, setPlaying } = useContext(SongsContext);
 
   const handleValue = (e) => {
     e.preventDefault();
@@ -131,6 +134,9 @@ export const Search = ({ show, setShow }) => {
     e.preventDefault();
     navigate(`?q=${decodeURI(value)}`);
     setValue('');
+    setPlaying(true);
+    trackAudio.current.setAttribute('autoPlay', 'true');
+    // trackAudio.current.removeAttribute('autoPlay');
   };
 
   const handleBars = () => {

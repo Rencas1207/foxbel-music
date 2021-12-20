@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { useSong } from '../../hooks/useSong';
@@ -14,6 +14,8 @@ import {
   IoPlaySkipBack,
   IoPlaySkipForward,
 } from 'react-icons/all';
+import { useParams } from 'react-router-dom';
+import { SongsContext } from '../../context/SongContext';
 
 const FooterStyled = styled.footer`
   position: fixed;
@@ -92,7 +94,7 @@ const FooterStyled = styled.footer`
     }
   }
   .volume {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -100,7 +102,7 @@ const FooterStyled = styled.footer`
     input {
       border: 1px solid green;
       -webkit-appearance: none;
-      width: 80%;
+      /* width: 80%; */
       outline: none;
       height: 5px;
       margin: 0 15px;
@@ -140,54 +142,64 @@ const FooterStyled = styled.footer`
 
 export const Footer = () => {
   // const [playing, setPlaying] = useState(false);
-  const { track, playing, setPlaying, songs, sound } = useSong();
-  const trackAudio = useRef(null);
+  const { track } = useSong();
+  const { playing, setPlaying, trackAudio, autoPlay, songs } =
+    useContext(SongsContext);
+  const { id } = useParams();
   const volumeAudio = useRef(null);
   const [volume, setVolume] = useState(30);
 
-  const toggle = () => setPlaying(!playing);
+  // console.log(track);
+  // console.log(track);
 
-  // console.log(sound);
+  let trackFilter = songs.filter((item) => item.id === parseInt(id));
 
-  // let songsNew = songs.map().filter((item) => item.id === sound);
-  let songsNew = songs
-    .map((item) => {
-      return item;
-    })
-    .filter((track) => track.id === sound);
-
-  // console.log(songsNew);
+  const toggle = () => {
+    setPlaying(!playing);
+  };
 
   useEffect(() => {
+    // console.log(playing);
+
+    // trackAudio.current.removeAttribute('autoPlay');
     playing ? trackAudio.current.play() : trackAudio.current.pause();
 
     trackAudio.current.addEventListener('ended', () => setPlaying(false));
-    // return () => {
-    //   trackAudio.current.removeEventListener('ended', () => setPlaying(false));
-
-    // };
-  }, [playing, setPlaying]);
+  }, [playing, setPlaying, trackAudio]);
 
   const volumeChange = () => {
     trackAudio.current.volume = volumeAudio.current.value / 100;
     setVolume(volumeAudio.current.value);
   };
 
-  // console.log(track);
+  let firstImage = songs[0]?.album.cover_medium;
+  let firstSong = songs[0]?.preview;
+  let firtTitle = songs[0]?.album.title;
+  let firtTitleShort = songs[0]?.title_short;
+  let firstArtist = songs[0]?.artist.name;
 
   return (
     <FooterStyled>
       <div className="figure">
         <img
-          src={track.album?.cover_medium}
-          alt={track.album?.title}
-          title={track.title_short}
+          src={
+            trackFilter[0]?.album.cover_medium ||
+            firstImage ||
+            track.album?.cover_medium
+          }
+          alt={trackFilter[0]?.album.title || firtTitle || track.album?.title}
+          title={
+            trackFilter[0]?.title_short || firtTitleShort || track?.title_short
+          }
           loading="lazy"
         />
         <div className="figure__description">
-          <p>{track.title_short}</p>
+          <p>
+            {trackFilter[0]?.title_short || firtTitleShort || track.title_short}
+          </p>
           <span>
-            {track.artist?.name} - {track.album?.title}
+            {trackFilter[0]?.artist.name || firstArtist || track.artist?.name} -{' '}
+            {trackFilter[0]?.album.title || firtTitle || track.album?.title}
           </span>
         </div>
       </div>
@@ -197,7 +209,11 @@ export const Footer = () => {
         </button>
         <button className="play" onClick={toggle}>
           {playing ? <FaPause /> : <FaPlay />}
-          <audio src={track?.preview} ref={trackAudio} id="audio"></audio>
+          <audio
+            src={trackFilter[0]?.preview || firstSong || track?.preview}
+            ref={trackAudio}
+            autoPlay={false}
+          ></audio>
         </button>
         <button id="next">
           <IoPlaySkipForward style={{ width: '26px', height: '26px' }} />
