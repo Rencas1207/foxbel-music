@@ -14,13 +14,12 @@ const SongGridStyled = styled.div`
 `;
 
 export const SongGrid = ({ songs }) => {
-  // const { loading } = useContext(SongsContext);
-  const { loadingSong } = useSong();
+  const { loading } = useSong();
   return (
     <SongGridStyled>
-      {loadingSong &&
+      {loading &&
         [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => <Loading key={i} />)}
-      {!loadingSong && songs.map((song, i) => <Song key={i} {...song} />)}
+      {!loading && songs.map((song, i) => <Song key={i} {...song} />)}
     </SongGridStyled>
   );
 };

@@ -11,22 +11,23 @@ export const useSong = () => {
 
   // const [loadingSong, setLoadingSong] = useState(false);
   const { id } = useParams();
+
   let location = useLocation();
   const currentTrack = location.search.slice(3);
-  // console.log(currentTrack);
+
   const keywordToUse =
     currentTrack || localStorage.getItem('lastKeyword') || 'Adele';
 
   useEffect(() => {
-    // setLoadingSong(true);
+    // setLoading(true);
     // setPlaying(false);
     getSongs({
       artist: currentTrack ? currentTrack : keywordToUse,
     }).then((data) => {
       setSongs(data);
-      setPlaying(false);
-      setLoading(false);
-      setAutoPlay(false);
+      // setPlaying(false);
+      // setLoading(false);
+      // setAutoPlay(false);
     });
     localStorage.setItem('lastKeyword', keywordToUse);
   }, [setSongs, currentTrack, keywordToUse, setLoading]);

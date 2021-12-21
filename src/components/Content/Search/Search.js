@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { breakpoints } from '../../../styles/MediaQueries';
 import { useContext } from 'react/cjs/react.development';
 import { SongsContext } from '../../../context/SongContext';
+import { FaUser, FaSearch } from 'react-icons/fa';
 
 const SearchStyled = styled.section`
   width: 100%;
@@ -66,7 +67,7 @@ const SearchStyled = styled.section`
     width: 45%;
     position: relative;
     display: flex;
-
+    /* border: 1px solid green; */
     ${breakpoints.tablet} {
       width: 80%;
     }
@@ -74,35 +75,57 @@ const SearchStyled = styled.section`
       width: 70%;
     }
 
-    input {
-      padding: 0.6rem 1.2rem;
+    .search {
+      border: 1px solid green;
       width: 100%;
-      border: 1px solid var(--soft-gray);
-      font-weight: 300;
-      border-radius: 100px;
-      font-size: 18px;
-      font-weight: 100;
-      transition: all 0.5s ease;
-      &::placeholder {
-        color: var(--soft-gray);
-        font-weight: 300;
-      }
-      &:focus {
-        border: 1px solid var(--main-red);
-      }
-    }
-    i {
-      position: absolute;
-      right: 18px;
-      top: 10px;
-      bottom: 10px;
-      color: var(--soft-gray);
-      font-size: 20px;
-      cursor: pointer;
+      position: relative;
 
-      ${breakpoints.phone} {
-        top: 7px;
+      .icon-search {
+        position: absolute;
+        right: 0;
+        /* content: ''; */
+        /* z-index: 99; */
+        /* margin-right: -2rem; */
+        /* right: 102px; */
+        /* padding: 0 2rem; */
+        /* top: 10px; */
+        /* bottom: 10px; */
+        /* border: 1px solid blue; */
+        font-size: 20px;
+        cursor: pointer;
+        svg {
+          fill: var(--main-red);
+        }
       }
+      input {
+        padding: 0.6rem 1.2rem;
+        border: 1px solid var(--soft-gray);
+        font-weight: 300;
+        border-radius: 100px;
+        font-size: 18px;
+        font-weight: 100;
+        width: 80%;
+        transition: all 0.5s ease;
+
+        &::placeholder {
+          color: var(--soft-gray);
+          font-weight: 300;
+        }
+        &:hover {
+          border: 1px solid var(--main-red);
+        }
+        &:focus {
+          border: 1px solid var(--main-red);
+          width: 100%;
+          /* .icon-search {
+            right: 100px;
+          } */
+        }
+      }
+
+      /* ${breakpoints.phone} {
+        top: 7px;
+      } */
     }
   }
   .user {
@@ -110,9 +133,11 @@ const SearchStyled = styled.section`
     align-items: center;
     justify-content: flex-end;
     width: 30%;
-    i {
-      color: var(--main-red);
-      padding-right: 0.5rem;
+    svg {
+      fill: var(--main-red);
+      width: 20px;
+      height: 20px;
+      margin-right: 0.5rem;
     }
     p {
       font-size: 16px;
@@ -134,9 +159,6 @@ export const Search = ({ show, setShow }) => {
     e.preventDefault();
     navigate(`?q=${decodeURI(value)}`);
     setValue('');
-    setPlaying(true);
-    trackAudio.current.setAttribute('autoPlay', 'true');
-    // trackAudio.current.removeAttribute('autoPlay');
   };
 
   const handleBars = () => {
@@ -153,17 +175,21 @@ export const Search = ({ show, setShow }) => {
         >
           <span></span>
         </div>
-        <i className="fas fa-search" onClick={handleSearch}></i>
-        <input
-          type="text"
-          placeholder="Buscar..."
-          name="value"
-          value={value}
-          onChange={handleValue}
-        />
+        <label className="search">
+          <div className="icon-search">
+            <FaSearch />
+          </div>
+          <input
+            type="text"
+            placeholder="Buscar..."
+            name="value"
+            value={value}
+            onChange={handleValue}
+          />
+        </label>
       </form>
       <div className="user">
-        <i className="fas fa-user"></i>
+        <FaUser />
         <p>Renzo C.</p>
       </div>
     </SearchStyled>

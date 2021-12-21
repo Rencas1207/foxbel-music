@@ -14,7 +14,8 @@ const ResultsStyles = styled.section`
 `;
 
 export const Results = () => {
-  const { songs } = useSong();
+  // const { songs } = useSong();
+  const { songs } = useContext(SongsContext);
   // console.log(songs);
 
   return (

@@ -18,7 +18,7 @@ export const SearchSongs = () => {
     <>
       <Helmet>
         <link rel="icon" href={icon} />
-        <title>Foxbel Mussic - Busca por canción, artista o álbum</title>
+        <title>Foxbel Music - Busca por canción, artista o álbum</title>
       </Helmet>
       <div className="grid">
         <Aside show={show} setShow={setShow} />

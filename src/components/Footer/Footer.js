@@ -141,16 +141,12 @@ const FooterStyled = styled.footer`
 `;
 
 export const Footer = () => {
-  // const [playing, setPlaying] = useState(false);
   const { track } = useSong();
   const { playing, setPlaying, trackAudio, autoPlay, songs } =
     useContext(SongsContext);
   const { id } = useParams();
   const volumeAudio = useRef(null);
   const [volume, setVolume] = useState(30);
-
-  // console.log(track);
-  // console.log(track);
 
   let trackFilter = songs.filter((item) => item.id === parseInt(id));
 
@@ -159,8 +155,6 @@ export const Footer = () => {
   };
 
   useEffect(() => {
-    // console.log(playing);
-
     // trackAudio.current.removeAttribute('autoPlay');
     playing ? trackAudio.current.play() : trackAudio.current.pause();
 
@@ -174,8 +168,8 @@ export const Footer = () => {
 
   let firstImage = songs[0]?.album.cover_medium;
   let firstSong = songs[0]?.preview;
-  let firtTitle = songs[0]?.album.title;
-  let firtTitleShort = songs[0]?.title_short;
+  let firstTitle = songs[0]?.album.title;
+  let firstTitleShort = songs[0]?.title_short;
   let firstArtist = songs[0]?.artist.name;
 
   return (
@@ -183,23 +177,27 @@ export const Footer = () => {
       <div className="figure">
         <img
           src={
-            trackFilter[0]?.album.cover_medium ||
-            firstImage ||
-            track.album?.cover_medium
+            trackFilter[0]?.album?.cover_medium ||
+            track?.album?.cover_medium ||
+            firstImage
           }
-          alt={trackFilter[0]?.album.title || firtTitle || track.album?.title}
+          alt={
+            trackFilter[0]?.album?.title || track?.album?.title || firstTitle
+          }
           title={
-            trackFilter[0]?.title_short || firtTitleShort || track?.title_short
+            trackFilter[0]?.title_short || track?.title_short || firstTitleShort
           }
           loading="lazy"
         />
         <div className="figure__description">
           <p>
-            {trackFilter[0]?.title_short || firtTitleShort || track.title_short}
+            {trackFilter[0]?.title_short ||
+              track.title_short ||
+              firstTitleShort}
           </p>
           <span>
-            {trackFilter[0]?.artist.name || firstArtist || track.artist?.name} -{' '}
-            {trackFilter[0]?.album.title || firtTitle || track.album?.title}
+            {trackFilter[0]?.artist.name || track.artist?.name || firstArtist} -{' '}
+            {trackFilter[0]?.album.title || track.album?.title || firstTitle}
           </span>
         </div>
       </div>
@@ -210,9 +208,15 @@ export const Footer = () => {
         <button className="play" onClick={toggle}>
           {playing ? <FaPause /> : <FaPlay />}
           <audio
-            src={trackFilter[0]?.preview || firstSong || track?.preview}
+            src={
+              trackFilter[0]?.preview || track?.preview || firstSong
+              // firstSong
+              //
+            }
             ref={trackAudio}
-            autoPlay={false}
+            // preload
+            // onError={togg}
+            // autoPlay
           ></audio>
         </button>
         <button id="next">
@@ -230,9 +234,9 @@ export const Footer = () => {
           onChange={volumeChange}
         />
         <span className="volume-control">
-          {volume >= 0 && volume <= 5 ? (
+          {volume >= 0 && volume <= 2 ? (
             <FaVolumeMute />
-          ) : volume >= 6 && volume <= 29 ? (
+          ) : volume >= 3 && volume <= 29 ? (
             <FaVolumeOff />
           ) : volume >= 30 && volume <= 59 ? (
             <FaVolumeDown />
@@ -244,3 +248,7 @@ export const Footer = () => {
     </FooterStyled>
   );
 };
+
+// export default React.memo(Song, (prevProps, nextProps) => {
+//   return prevProps.id === nextProps.id;
+// });

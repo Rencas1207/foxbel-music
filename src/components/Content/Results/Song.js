@@ -48,17 +48,9 @@ const Song = ({ artist, title, album, id }) => {
   const track = () => {
     navigate(`/track/${id}`);
     // setLoading(false);
-    setAutoPlay(true);
+    // setAutoPlay(true);
     setPlaying(true);
     trackAudio.current.setAttribute('autoPlay', 'true');
-
-    // if (playing) {
-    // trackAudio.current.play();
-    // } else {
-    //   trackAudio.current.pause();
-    // }
-    // console.log(playing);
-    // playing ? trackAudio.current.play() : null;
   };
 
   return (
