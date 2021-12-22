@@ -20,7 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<SearchSongs />} />
           <Route path="/track/:id" element={<SearchSongs />} />
-          <Route path="/?q=*" element={<SearchSongs />} />
+          {/* <Route path="/?q=*" element={<SearchSongs />} /> */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>

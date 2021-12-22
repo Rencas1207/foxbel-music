@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaPause, FaPlay } from 'react-icons/fa';
 import { useContext } from 'react/cjs/react.development';
 
 import styled from 'styled-components';
@@ -27,17 +28,20 @@ const VideoDetailStyled = styled.section`
       width: 100%;
       height: 100%;
     }
-    i {
+    svg {
       position: absolute;
       top: 0;
       bottom: 0;
       left: 0;
       right: 0;
-      display: flex;
+      margin: auto;
+      width: 80px;
+      height: 80px;
+      /* display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 63px;
-      color: var(--white);
+      font-size: 63px; */
+      fill: var(--white);
       cursor: pointer;
     }
   }
@@ -96,9 +100,9 @@ const VideoDetailStyled = styled.section`
       width: 100%;
       margin-top: 2.5rem;
       .btn {
-        width: 120px;
+        width: 140px;
         font-size: 14px;
-        padding: 0.6rem 1rem;
+        padding: 0.6rem 1.2rem;
         margin-right: 1.2rem;
         border-radius: 100px;
         border: 1px solid var(--main-red);
@@ -125,8 +129,8 @@ const VideoDetailStyled = styled.section`
 `;
 
 export const VideoDetail = () => {
-  const { loading } = useContext(SongsContext);
-  // const { track, loading } = useSong();
+  const { playing, setPlaying } = useContext(SongsContext);
+  const { track, loading } = useSong();
 
   return (
     <>
@@ -136,40 +140,39 @@ export const VideoDetail = () => {
         <VideoDetailStyled className="mb-3">
           <div className="artist-figure">
             <img
-              // src={track?.artist?.picture_medium}
-              // alt={track?.artist?.name}
+              src={track?.artist?.picture_medium}
+              alt={track?.artist?.name}
               loading="lazy"
             />
-            <i className="fas fa-play"></i>
+            {/* <i className="fas fa-play"></i> */}
+            {playing ? <FaPause /> : <FaPlay />}
           </div>
           <div
             className="artist-description"
-            style={
-              {
-                // background: `url(${track?.album?.cover_xl}) center no-repeat`,
-              }
-            }
+            style={{
+              background: `url(${track?.album?.cover_xl}) center no-repeat `,
+            }}
           >
             <div className="artist-description__shadow"></div>
             <div className="artist-description__content">
               <h2 className="artist-description__title">
-                {/* {track?.artist?.name} */}
+                {track?.artist?.name}
               </h2>
               <div className="artist-description__item">
                 <p>
-                  {/* Lo mejor de {track?.artist?.name}{' '} */}
+                  Lo mejor de {track?.artist?.name}{' '}
                   <span>321, 123 seguidores</span>
                 </p>
                 <summary>
-                  {/* {track?.artist?.name}  */}
-                  (Tottenham, Londres, Inglaterra, 5 de mayo de 1988), conocida
-                  simplemente como
-                  {/* {track?.artist?.name} */}, es una cantante, compositora y
-                  multinstrumentista británica.
+                  {track?.artist?.name} (Tottenham, Londres, Inglaterra, 5 de
+                  mayo de 1988), conocida simplemente como {track?.artist?.name}
+                  , es una cantante, compositora y multinstrumentista británica.
                 </summary>
               </div>
               <div className="artist-btns">
-                <button className="btn">Reproducir</button>
+                <button className="btn" onClick={() => setPlaying(!playing)}>
+                  {playing ? 'Reproduciendo' : 'Pausado'}
+                </button>
                 <button className="btn seguir">Seguir</button>
                 <ThreePoints $position="relative" />
               </div>

@@ -1,113 +1,84 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
 import logo from '../../assets/foxbel-music.png';
 
 import { Link } from 'react-router-dom';
-import { breakpoints } from '../../styles/MediaQueries';
-
-const AsideStyled = styled.aside`
-  background: var(--dark-red-second);
-  color: var(--white);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-
-  ${breakpoints.tablet} {
-    position: fixed;
-    width: 330px;
-    height: 100vh;
-    content: '';
-    top: 0;
-    transition: right 0.5s ease;
-    right: ${(props) => (props.show ? '-15%' : '-100%;')};
-    z-index: 9999;
-  }
-
-  img {
-    /* border: 1px solid blue; */
-    width: 250px;
-    height: 60px;
-    margin: 2rem 0;
-  }
-
-  .list {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    text-align: left;
-    margin-bottom: 2rem;
-    &__title {
-      padding: 0.5rem 2rem;
-      font-size: 22px;
-      font-weight: bold;
-    }
-    &__item {
-      font-size: 16px;
-      padding: 0.4rem 2rem;
-      font-weight: 400;
-      color: var(--white);
-      cursor: pointer;
-      transition: color 0.3s ease;
-      position: relative;
-      &.active {
-        color: var(--main-red);
-        &::before {
-          position: absolute;
-          content: '';
-          top: 3px;
-          bottom: 2px;
-          left: 0;
-          background: var(--main-red);
-          width: 0.3rem;
-          height: 80%;
-        }
-      }
-
-      &:hover {
-        color: var(--main-red);
-      }
-    }
-  }
-`;
+import { AsideStyles } from './AsideStyles';
 
 export const Aside = ({ show }) => {
+  const [itemActive, setItemActive] = useState(1);
+
   return (
-    <AsideStyled show={show}>
+    <AsideStyles show={show}>
       <img src={logo} alt="foxbel-music" loading="lazy" />
       <div className="list">
         <h3 className="list__title">Mi Librería</h3>
-        <Link to="?q=recientes" className="list__item active">
+        <Link
+          to="/?q=recientes"
+          className={`list__item ${itemActive === 1 ? 'active' : null}`}
+          onClick={() => setItemActive(1)}
+        >
           Recientes
         </Link>
-        <Link to="?q=artistas" className="list__item">
+        <Link
+          to="/?q=artistas"
+          className={`list__item ${itemActive === 2 ? 'active' : null}`}
+          onClick={() => setItemActive(2)}
+        >
           Artistas
         </Link>
-        <Link to="?q=albums" className="list__item">
+        <Link
+          to="/?q=albums"
+          className={`list__item ${itemActive === 3 ? 'active' : null}`}
+          onClick={() => setItemActive(3)}
+        >
           Álbums
         </Link>
-        <Link to="?q=canciones" className="list__item">
+        <Link
+          to="/?q=canciones"
+          className={`list__item ${itemActive === 4 ? 'active' : null}`}
+          onClick={() => setItemActive(4)}
+        >
           Canciones
         </Link>
-        <Link to="?q=estaciones" className="list__item">
+        <Link
+          to="/?q=estaciones"
+          className={`list__item ${itemActive === 5 ? 'active' : null}`}
+          onClick={() => setItemActive(5)}
+        >
           Estaciones
         </Link>
       </div>
       <div className="list">
         <h3 className="list__title">Playlist</h3>
-        <Link to="?q=metal" className="list__item">
+        <Link
+          to="/?q=metal"
+          className={`list__item ${itemActive === 6 ? 'active' : null}`}
+          onClick={() => setItemActive(6)}
+        >
           Metal
         </Link>
-        <Link to="?q=dance" className="list__item">
+        <Link
+          to="/?q=dance"
+          className={`list__item ${itemActive === 7 ? 'active' : null}`}
+          onClick={() => setItemActive(7)}
+        >
           Para bailar
         </Link>
-        <Link to="?q=rock" className="list__item">
+        <Link
+          to="/?q=rock"
+          className={`list__item ${itemActive === 8 ? 'active' : null}`}
+          onClick={() => setItemActive(8)}
+        >
           Rock 90s
         </Link>
-        <Link to="?q=baladas" className="list__item">
+        <Link
+          to="/?q=baladas"
+          className={`list__item ${itemActive === 9 ? 'active' : null}`}
+          onClick={() => setItemActive(9)}
+        >
           Baladas
         </Link>
       </div>
-    </AsideStyled>
+    </AsideStyles>
   );
 };

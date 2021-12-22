@@ -42,12 +42,11 @@ const SongStyles = styled.div`
 
 const Song = ({ artist, title, album, id }) => {
   const navigate = useNavigate();
-  const { setPlaying, trackAudio, playing, autoPlay, setAutoPlay, setLoading } =
-    useContext(SongsContext);
+  const { setPlaying, trackAudio, playing } = useContext(SongsContext);
 
   const track = () => {
     navigate(`/track/${id}`);
-    // setLoading(false);
+    // setLoading(true);
     // setAutoPlay(true);
     setPlaying(true);
     trackAudio.current.setAttribute('autoPlay', 'true');
@@ -56,7 +55,12 @@ const Song = ({ artist, title, album, id }) => {
   return (
     <SongStyles>
       <div className="figure" onClick={track}>
-        <img src={album.cover_medium} alt={title} loading="lazy" />
+        <img
+          src={album.cover_medium}
+          alt={title}
+          onClick={() => setPlaying(!playing)}
+          loading="lazy"
+        />
         <FaPlay />
         <ThreePoints $rotate="-90deg" $position="absolute" rotate="true" />
       </div>

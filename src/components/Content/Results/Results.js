@@ -1,8 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import styled from 'styled-components';
-import { SongsContext } from '../../../context/SongContext';
-import { useSong } from '../../../hooks/useSong';
 import { SongGrid } from './SongGrid';
 
 const ResultsStyles = styled.section`
@@ -14,15 +12,11 @@ const ResultsStyles = styled.section`
 `;
 
 export const Results = () => {
-  // const { songs } = useSong();
-  const { songs } = useContext(SongsContext);
-  // console.log(songs);
-
   return (
     <>
       <ResultsStyles>
         <h2 className="mb-2">Resultados</h2>
-        <SongGrid songs={songs} />
+        <SongGrid />
       </ResultsStyles>
     </>
   );
