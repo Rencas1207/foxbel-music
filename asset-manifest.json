@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.js": "/foxbel-music/static/js/main.f99273dd.chunk.js",
-    "main.js.map": "/foxbel-music/static/js/main.f99273dd.chunk.js.map",
+    "main.js": "/foxbel-music/static/js/main.e0309f60.chunk.js",
+    "main.js.map": "/foxbel-music/static/js/main.e0309f60.chunk.js.map",
     "runtime-main.js": "/foxbel-music/static/js/runtime-main.a78e36b8.js",
     "runtime-main.js.map": "/foxbel-music/static/js/runtime-main.a78e36b8.js.map",
-    "static/js/2.98e2e9ab.chunk.js": "/foxbel-music/static/js/2.98e2e9ab.chunk.js",
-    "static/js/2.98e2e9ab.chunk.js.map": "/foxbel-music/static/js/2.98e2e9ab.chunk.js.map",
+    "static/js/2.3f72e63b.chunk.js": "/foxbel-music/static/js/2.3f72e63b.chunk.js",
+    "static/js/2.3f72e63b.chunk.js.map": "/foxbel-music/static/js/2.3f72e63b.chunk.js.map",
     "index.html": "/foxbel-music/index.html",
-    "static/js/2.98e2e9ab.chunk.js.LICENSE.txt": "/foxbel-music/static/js/2.98e2e9ab.chunk.js.LICENSE.txt"
+    "static/js/2.3f72e63b.chunk.js.LICENSE.txt": "/foxbel-music/static/js/2.3f72e63b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.a78e36b8.js",
-    "static/js/2.98e2e9ab.chunk.js",
-    "static/js/main.f99273dd.chunk.js"
+    "static/js/2.3f72e63b.chunk.js",
+    "static/js/main.e0309f60.chunk.js"
   ]
 }
