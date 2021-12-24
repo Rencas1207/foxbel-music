@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaPause, FaPlay } from 'react-icons/fa';
-import { useContext } from 'react/cjs/react.development';
 
 import styled from 'styled-components';
 import { SongsContext } from '../../../context/SongContext';
 import { useSong } from '../../../hooks/useSong';
 import { breakpoints } from '../../../styles/MediaQueries';
-import { Loading } from '../../Loading/Loading';
+// import { Loading } from '../../Loading/Loading';
 
 import { ThreePoints } from '../Results/ThreePoints';
 
@@ -130,56 +129,46 @@ const VideoDetailStyled = styled.section`
 
 export const VideoDetail = () => {
   const { playing, setPlaying } = useContext(SongsContext);
-  const { track, loading } = useSong();
+  const { track } = useSong();
 
   return (
-    <>
-      {loading ? (
-        <Loading />
-      ) : (
-        <VideoDetailStyled className="mb-3">
-          <div className="artist-figure">
-            <img
-              src={track?.artist?.picture_medium}
-              alt={track?.artist?.name}
-              loading="lazy"
-            />
-            {/* <i className="fas fa-play"></i> */}
-            {playing ? <FaPause /> : <FaPlay />}
+    <VideoDetailStyled className="mb-3">
+      <div className="artist-figure">
+        <img
+          src={track?.artist?.picture_medium}
+          alt={track?.artist?.name}
+          loading="lazy"
+        />
+        {playing ? <FaPause /> : <FaPlay />}
+      </div>
+      <div
+        className="artist-description"
+        style={{
+          background: `url(${track?.album?.cover_xl}) center no-repeat`,
+        }}
+      >
+        <div className="artist-description__shadow"></div>
+        <div className="artist-description__content">
+          <h2 className="artist-description__title">{track?.artist?.name}</h2>
+          <div className="artist-description__item">
+            <p>
+              Lo mejor de {track?.artist?.name} <span>321, 123 seguidores</span>
+            </p>
+            <summary>
+              {track?.artist?.name} (Tottenham, Londres, Inglaterra, 5 de mayo
+              de 1988), conocida simplemente como {track?.artist?.name}, es una
+              cantante, compositora y multinstrumentista británica.
+            </summary>
           </div>
-          <div
-            className="artist-description"
-            style={{
-              background: `url(${track?.album?.cover_xl}) center no-repeat `,
-            }}
-          >
-            <div className="artist-description__shadow"></div>
-            <div className="artist-description__content">
-              <h2 className="artist-description__title">
-                {track?.artist?.name}
-              </h2>
-              <div className="artist-description__item">
-                <p>
-                  Lo mejor de {track?.artist?.name}{' '}
-                  <span>321, 123 seguidores</span>
-                </p>
-                <summary>
-                  {track?.artist?.name} (Tottenham, Londres, Inglaterra, 5 de
-                  mayo de 1988), conocida simplemente como {track?.artist?.name}
-                  , es una cantante, compositora y multinstrumentista británica.
-                </summary>
-              </div>
-              <div className="artist-btns">
-                <button className="btn" onClick={() => setPlaying(!playing)}>
-                  {playing ? 'Reproduciendo' : 'Pausado'}
-                </button>
-                <button className="btn seguir">Seguir</button>
-                <ThreePoints $position="relative" />
-              </div>
-            </div>
+          <div className="artist-btns">
+            <button className="btn" onClick={() => setPlaying(!playing)}>
+              {playing ? 'Reproduciendo' : 'Pausado'}
+            </button>
+            <button className="btn seguir">Seguir</button>
+            <ThreePoints $position="relative" />
           </div>
-        </VideoDetailStyled>
-      )}
-    </>
+        </div>
+      </div>
+    </VideoDetailStyled>
   );
 };
