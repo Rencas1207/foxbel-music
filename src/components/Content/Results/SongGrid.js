@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 
 import styled from 'styled-components';
 import { SongsContext } from '../../../context/SongContext';
-// import { useSong } from '../../../hooks/useSong';
 import { Loading } from '../../Loading/Loading';
 import Song from './Song';
 

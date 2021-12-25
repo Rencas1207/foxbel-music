@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { SongsContext } from '../../../context/SongContext';
 import { useSong } from '../../../hooks/useSong';
 import { breakpoints } from '../../../styles/MediaQueries';
-// import { Loading } from '../../Loading/Loading';
 
 import { ThreePoints } from '../Results/ThreePoints';
 
@@ -36,18 +35,12 @@ const VideoDetailStyled = styled.section`
       margin: auto;
       width: 80px;
       height: 80px;
-      /* display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 63px; */
       fill: var(--white);
       cursor: pointer;
     }
   }
   .artist-description {
     width: 74%;
-    /* opacity: 0.8; */
-    /* border: 1px solid blue; */
     position: relative;
     ${breakpoints.tablet} {
       width: 100%;
@@ -90,6 +83,10 @@ const VideoDetailStyled = styled.section`
         font-size: 13.5px;
         line-height: 20px;
         padding-top: 1rem;
+
+        ${breakpoints.phone} {
+          font-size: 11.5px;
+        }
       }
     }
     .artist-btns {
@@ -121,6 +118,11 @@ const VideoDetailStyled = styled.section`
             color: var(--white);
             background: var(--main-red);
           }
+        }
+
+        ${breakpoints.phone} {
+          font-size: 12px;
+          width: 110px;
         }
       }
     }

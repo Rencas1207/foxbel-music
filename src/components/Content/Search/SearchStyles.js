@@ -7,14 +7,18 @@ export const SearchStyles = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 2rem 0;
+
   .hamburger {
     display: none;
+    z-index: 99999;
 
     ${breakpoints.tablet} {
       display: flex;
       margin-right: 2rem;
       align-items: center;
       cursor: pointer;
+
       span {
         position: relative;
         width: 2rem;
@@ -22,6 +26,11 @@ export const SearchStyles = styled.section`
         background: var(--main-red);
         border-radius: 2rem;
         transition: background 0.4s ease;
+
+        ${breakpoints.phone} {
+          width: 2.2rem;
+        }
+
         &::after,
         &::before {
           position: absolute;
@@ -54,29 +63,48 @@ export const SearchStyles = styled.section`
         }
       }
     }
+
+    ${breakpoints.phone} {
+      margin-right: 3rem;
+    }
   }
   .bar-search {
     line-height: 36px;
-    width: 45%;
+    width: 70%;
     position: relative;
     display: flex;
     ${breakpoints.tablet} {
-      width: 80%;
+      width: 100%;
     }
     ${breakpoints.phone} {
-      width: 70%;
+      width: 100%;
     }
 
     .search {
       padding: 0.3rem 1.6rem 0.3rem 0rem;
       position: relative;
       transition: all 0.5s ease;
-
       z-index: 999;
 
       &:hover {
         input {
-          width: 320px;
+          width: 360px;
+        }
+      }
+
+      ${breakpoints.phone} {
+        &:hover {
+          input {
+            width: 220px;
+          }
+        }
+      }
+
+      ${breakpoints.phoneSmall} {
+        &:hover {
+          input {
+            width: 160px;
+          }
         }
       }
 
@@ -87,6 +115,7 @@ export const SearchStyles = styled.section`
         font-size: 18px;
         font-weight: 100;
         width: 0px;
+        /* width: 0%; */
         height: 40px;
         z-index: -1;
         padding-left: 1.2rem;
@@ -101,7 +130,20 @@ export const SearchStyles = styled.section`
         }
         &:focus {
           border: 1px solid var(--main-red);
-          width: 320px;
+          width: 360px;
+          /* width: 100%; */
+        }
+
+        ${breakpoints.phone} {
+          &:focus {
+            width: 220px;
+          }
+        }
+
+        ${breakpoints.phoneSmall} {
+          &:focus {
+            width: 160px;
+          }
         }
       }
 
@@ -140,6 +182,14 @@ export const SearchStyles = styled.section`
     align-items: center;
     justify-content: flex-end;
     width: 30%;
+    ${breakpoints.tablet} {
+      /* display: none; */
+      width: 20%;
+    }
+    ${breakpoints.phone} {
+      display: none;
+    }
+
     svg {
       fill: var(--main-red);
       width: 20px;

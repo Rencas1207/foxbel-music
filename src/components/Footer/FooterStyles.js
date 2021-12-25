@@ -57,7 +57,6 @@ export const FooterStyles = styled.footer`
     }
   }
   .middle {
-    /* border: 1px solid blue; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -71,33 +70,34 @@ export const FooterStyles = styled.footer`
       &.play {
         border-radius: 50%;
         background: var(--light-red);
-        padding: 0 1rem;
+        padding: 1rem;
       }
+       ${breakpoints.phone} {
+      width: 5rem;
+      height: 5rem;
+    }
+    }
+
+   
       svg {
         fill: var(--white);
         width: 20px;
         height: 20px;
-        /* text-align: center; */
+        /* padding: 1rem; */
       }
     }
   }
   .volume {
-    /* border: 1px solid red; */
     align-items: center;
     position: relative;
     display: flex;
     justify-content: space-between;
     ${breakpoints.tablet} {
       align-items: center;
-
       justify-content: center;
       flex-direction: column;
-      /* background: blue; */
-      /* margin-bottom: 3rem; */
     }
     input {
-      /* border: 1px solid red; */
-      /* border: 1px solid green; */
       -webkit-appearance: none;
       outline: none;
       height: 5px;
@@ -107,9 +107,8 @@ export const FooterStyles = styled.footer`
       ${breakpoints.tablet} {
         position: absolute;
         content: '';
-        right: 20px;
-        /* left: -2; */
-        top: 0.6rem;
+        top: 1rem;
+        left: -21px;
         transform: rotate(-90deg);
         width: 100px;
       }
@@ -125,17 +124,18 @@ export const FooterStyles = styled.footer`
         &:hover {
           border: 1px solid var(--main-red);
         }
+
+        ${breakpoints.phone} {
+          height: 18px;
+          width: 18px;
+        }
       }
     }
     .volume-control {
-      /* border: 1px solid green; */
-      /* display: flex;
-      justify-content: center;
-      align-items: center; */
       margin: 0 2.8rem 0 0rem;
-      ${breakpoints.tablet} {
+      /* ${breakpoints.tablet} {
         margin: 0 2.8rem 0rem 0rem;
-      }
+      } */
 
       svg {
         fill: var(--white);
